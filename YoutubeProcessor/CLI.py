@@ -3,12 +3,16 @@ import os
 import json
 from typing import Dict, List
 from AIEditor import AIEditor  # Assuming AIEditor is defined in a separate module
+from _utils import download_video  # Importing the download function
+from Cropping import VideoProcessor, YOLOv5Model  # Importing the video processing classes
 
 class CLI:
     def __init__(self, ai_editor: AIEditor, cache_file: str = "llm_cache.json"):
         self.ai_editor = ai_editor
         self.cache_file = cache_file
         self.llm_cache = self.load_cache()
+        self.model = YOLOv5Model()  # Initialize the YOLO model
+        self.video_processor = VideoProcessor(self.model)  # Initialize video processor
 
     def load_cache(self) -> Dict[str, str]:
         """Loads the cached LLM responses from a JSON file."""
@@ -126,6 +130,24 @@ class CLI:
                     print("No topic selected. Returning to section selection.")
                     break
 
+    def download_and_clip_video(self, video_url, segments):
+        """Handles downloading and clipping the video based on selected segments."""
+        # Step 1: Download the video
+        video_filename = "downloaded_video.mp4"
+        print(f"\nDownloading video from {video_url}...")
+        download_video(video_url, video_filename)
+
+        # Step 2: Process the video and create clips based on segments
+        print("\nProcessing and clipping the video...")
+        clips = self.video_processor.segment_video(video_filename, segments)
+
+        # Optionally, combine the clips into a final video
+        output_video = "final_video.mp4"
+        print("\nCombining clips into final video...")
+        self.video_processor.process_video(video_filename, output_video)
+
+        print(f"\nVideo processing complete. Final video saved as {output_video}.")
+
     def run(self):
         print("Welcome to the AI Editor CLI!")
         video_id = input("Enter the YouTube video ID: ").strip()
@@ -166,6 +188,16 @@ class CLI:
                     print(f"Start Time: {clip_info['start_time']} seconds")
                     print(f"End Time: {clip_info['end_time']} seconds")
                     print(f"YouTube Link: {clip_info['youtube_link']}")
+
+                    # Ask user if they want to download and clip the video
+                    download_choice = input("Do you want to download and clip this video? (y/n): ").strip().lower()
+                    if download_choice == 'y':
+                        segments = [{
+                            "start_time": clip_info['start_time'],
+                            "end_time": clip_info['end_time'],
+                            "duration": clip_info['end_time'] - clip_info['start_time']
+                        }]
+                        self.download_and_clip_video(clip_info['youtube_link'], segments)
                 else:
                     print("Failed to generate clip information.")
             else:
@@ -178,10 +210,9 @@ class CLI:
 
 if __name__ == "__main__":
     # Initialize AIEditor with your API key
-    api_key = "your_api_key_here"  # Replace with your actual API key
+    api_key = "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"  # Replace with your actual API key
     ai_editor = AIEditor(api_key=api_key)
 
     # Initialize and run the CLI
     cli = CLI(ai_editor)
     cli.run()
-

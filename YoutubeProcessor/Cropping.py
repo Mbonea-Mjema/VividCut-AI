@@ -9,8 +9,8 @@ import warnings
 import logging
 
 # Suppress warnings and notices
-warnings.filterwarnings("ignore", category=UserWarning, module="torch")
-logging.getLogger("moviepy").setLevel(logging.ERROR)
+# warnings.filterwarnings("ignore", category=UserWarning, module="torch")
+# logging.getLogger("moviepy").setLevel(logging.ERROR)
 
 
 class YOLOv5Model:
@@ -77,7 +77,7 @@ class VideoProcessor:
                 chunk_file = os.path.join(self.temp_dir, f"clip_{segment_index}.mp4")
                 chunked_video.write_videofile(
                     chunk_file,
-                    codec="h264_nvenc",
+                    # codec="h264_nvenc",
                     audio_codec="aac",
                 )
                 chunked_video.close()
@@ -94,11 +94,11 @@ class VideoProcessor:
         for clip in clips:
             collection.append(VideoFileClip(clip))
         final_video = concatenate_videoclips(collection)
-        final_video.write_videofile(output_video, codec="h264_nvenc", audio_codec="aac")
+        final_video.write_videofile(output_video, audio_codec="aac")
         final_video.close()
         # Clean up temporary files
 
-    def segment_video(self, video, sample_rate):
+    def segment_video(self, video,  ):
         index = 0
         for t in np.arange(0, video.duration, sample_rate):
             frame = video.get_frame(t)
@@ -176,7 +176,7 @@ class VideoProcessor:
             y2=min(clip.h, y_center + new_h / 2),
         ).resize(height=new_height)
         return CompositeVideoClip(
-            [cropped_clip.with_position("center")], size=(clip.w, new_height)
+            [cropped_clip.set_position("center")], size=(clip.w, new_height)
         )
 
     def _process_split_screen(self, clip, bodies, new_height):
@@ -190,8 +190,8 @@ class VideoProcessor:
 
         return CompositeVideoClip(
             [
-                split_clips[0].with_position(("center", "top")),
-                split_clips[1].with_position(("center", "bottom")),
+                split_clips[0].set_position(("center", "top")),
+                split_clips[1].set_position(("center", "bottom")),
             ],
             size=(clip.w, new_height),
         )
