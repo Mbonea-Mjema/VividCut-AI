@@ -71,7 +71,7 @@ def segment_video(video_path, segments):
 
 
     # Input selection from the user
-    print("\nSelect an item number to find neighbors (or 'q' to quit):")
+    # print("\nSelect an item number to find neighbors (or 'q' to quit):")
     selection = input().strip()
 
     if selection.lower() == 'q':

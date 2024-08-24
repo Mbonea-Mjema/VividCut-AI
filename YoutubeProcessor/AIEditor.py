@@ -96,17 +96,18 @@ class AIEditor:
             filtered.append(temp_item['metadata'])
 
         items_dict = {i + 1: item for i, item in enumerate(all_items)}
-        temp = {i + 1: item for i, item in enumerate(filtered)}
 
-        print("\nItems Dictionary:")
-        for i, item in temp.items():
-            print(f"{i}: {item['text']}")
+        # temp = {i + 1: item for i, item in enumerate(filtered)}
+
+        # print("\nItems Dictionary:")
+        # for i, item in temp.items():
+        #     print(f"{i}: {item['text']}")
 
         return items_dict
 
     def find_neighbors_for_selected_items(self, items_dict: Dict[int, Dict]) -> Dict[int, Dict]:
-        print("\nSelect an item number to find neighbors (or 'q' to quit):")
-        selection = input().strip()
+        # print("\nSelect an item number to find neighbors (or 'q' to quit):")
+        selection = '1'
 
         if selection.lower() == 'q':
             return None
@@ -134,9 +135,9 @@ class AIEditor:
             sorted_transcripts = sorted(unique_transcripts, key=lambda x: x['start'])
             numbered_transcripts = {i + 1: transcript for i, transcript in enumerate(sorted_transcripts)}
 
-            print("\nCombined and Sorted Transcripts:")
-            for i, transcript in numbered_transcripts.items():
-                print(f"{i}: {transcript['text']}")
+            # print("\nCombined and Sorted Transcripts:")
+            # for i, transcript in numbered_transcripts.items():
+            #     print(f"{i}: {transcript['text']}")
 
             return numbered_transcripts
 

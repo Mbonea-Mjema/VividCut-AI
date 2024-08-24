@@ -167,7 +167,7 @@ class CLI:
                 response = cached_response
             else:
                 print(f"\nSearching for relevant content for topic: '{selected_topic}'")
-                response = self.ai_editor.search_and_process(selected_topic, k=4)
+                response = self.ai_editor.search_and_process(selected_topic, k=1)
                 if response:
                     self.cache_llm_response(selected_topic, response)
                 else:

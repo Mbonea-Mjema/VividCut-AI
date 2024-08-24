@@ -1,9 +1,29 @@
 
 # VividCut-AI
 
-![Dave the Video Editor](editor_pic.webp)
+<img src="editor_pic.webp" alt="Dave the Video Editor" width="200"/>
 
 Welcome to **VividCut-AI**! This repository provides a powerful tool for video editing using AI-powered technology. With VividCut-AI, you can efficiently edit videos by passing a YouTube video ID and leveraging the power of FFmpeg and Python.
+
+## Workflow Overview
+
+Below is a visual representation of how VividCut-AI processes video clips:
+
+<img src="Untitled-2023-08-28-1608.png" alt="VividCut-AI Workflow" width="700"/>
+
+### Workflow Description
+
+1. **YouTube Link Processor**: The user inputs a YouTube link, which is processed to extract the video's transcript.
+
+2. **Transcript Chunking**: The transcript is chunked into smaller parts with overlapping. Each chunk is 120 seconds of the audio transcript, with an overlapping of 40 seconds between chunks. This is used to create the Faiss Index.
+
+3. **Faiss Index**: The Faiss Index is created from the chunks and is used to efficiently search through the transcript data.
+
+4. **LLM Interaction**: The user queries the system, selecting a quote, idea, story, or custom detail to extract. The LLM (Large Language Model) takes the query, processes the relevant chunks from the Faiss Index, and identifies the exact time range where the video should be cut.
+
+5. **Video Processor**: The video processor uses the time range identified by the LLM to cut the clip, track faces, and crop the video accordingly.
+
+6. **Output**: The final video clip is processed and outputted, ready for use.
 
 ## Requirements
 
