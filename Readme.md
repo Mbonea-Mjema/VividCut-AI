@@ -1,97 +1,114 @@
-# VividCut-AI
+# 🚀🎬 VividCut-AI
 
-<img src="editor_pic.webp" alt="Dave the Video Editor" width="200"/>
+## (Note: VividCut-AI is a powerful tool for automating video editing processes with AI)
 
-Welcome to **VividCut-AI**! This repository provides a powerful tool for video editing using AI-powered technology. With VividCut-AI, you can efficiently edit videos by passing a YouTube video ID and leveraging the power of FFmpeg and Python.
+<p align="center">
+  <a href="https://discord.gg/gVCBcfSH">
+    <img src="https://dcbadge.vercel.app/api/server/gVCBcfSH?compact=true&style=flat">
+  </a>
+  <a href="https://github.com/Mbonea-Mjema/VividCut-AI/stargazers">
+    <img src="https://img.shields.io/github/stars/Mbonea-Mjema/VividCut-AI?style=social">
+  </a>
+  <a href="https://github.com/Mbonea-Mjema/VividCut-AI/releases">
+    <img src="https://img.shields.io/github/downloads/Mbonea-Mjema/VividCut-AI/total?style=flat-square">
+  </a>
+  <a href="https://github.com/Mbonea-Mjema/VividCut-AI/wiki">
+    <img src="https://img.shields.io/badge/docs-visit-blue">
+  </a>  
+</p>
 
-## Workflow Overview
+<div align="center" style="border-radius: 20px;" width="18%">
+    <img src="editor_pic.webp" alt="VividCut-AI Logo" style="border-radius: 20px;" width="18%"/>
+</div>
+<div align="center">
+  <a href="https://discord.gg/gVCBcfSH">
+    <img src="https://img.shields.io/discord/1126042224979886160?color=7289da&logo=discord&logoColor=blue&labelColor=white&color=cyan" alt="Join our Discord" height="34">
+  </a>
+</div>
 
-Below is a visual representation of how VividCut-AI processes video clips:
+<div align="center">
+⚡ Automating video editing and processing with AI ⚡
+</div>
+</br>
 
-<img src="Untitled-2023-08-28-1608.png" alt="VividCut-AI Workflow" width="700"/>
+Follow the installation steps below for running VividCut-AI locally.
+Please read "installation-notes.md" for more details.
 
-### Workflow Description
+## 🎥 Showcase
 
-1. **YouTube Link Processor**: The user inputs a YouTube link, which is processed to extract the video's transcript.
+![Workflow](Untitled-2023-08-28-1608.png)
 
-2. **Transcript Chunking**: The transcript is chunked into smaller parts with overlapping. Each chunk is 120 seconds of the audio transcript, with an overlapping of 40 seconds between chunks. This is used to create the Faiss Index.
+## 🌟 Show Your Support
 
-3. **Faiss Index**: The Faiss Index is created from the chunks and is used to efficiently search through the transcript data. The text embeddings used to build this Faiss index are generated using the `Alibaba-NLP/gte-large-en-v1.5` model, which provides high-quality semantic embeddings for accurate content retrieval.
+We hope you find VividCut-AI helpful! If you do, let us know by giving us a star ⭐ on the repo. It's easy, just click on the 'Star' button at the top right of the page. Your support means a lot to us and keeps us motivated to improve and expand VividCut-AI. Thank you and happy content creating! 🎉
 
-4. **LLM Interaction**: The user queries the system, selecting a quote, idea, story, or custom detail to extract. The LLM (Large Language Model) takes the query, processes the relevant chunks from the Faiss Index, and identifies the exact time range where the video should be cut.
+[![GitHub star chart](https://api.star-history.com/svg?repos=Mbonea-Mjema/VividCut-AI&type=Date)](https://github.com/Mbonea-Mjema/VividCut-AI/stargazers)
 
-5. **Video Processor**: The video processor uses the time range identified by the LLM to cut the clip, track faces, and crop the video accordingly.
+## 🛠️ How it works
 
-6. **Output**: The final video clip is processed and outputted, ready for use.
+VividCut-AI is a powerful framework for automating video editing processes. It simplifies tasks such as video clipping, content extraction, and face tracking.
 
-## Requirements
+- 🎞️ **Automated editing framework**: Streamlines the video editing process using AI-driven techniques.
 
-Before you can use VividCut-AI, make sure you have the following dependencies installed:
+- 📃 **Content Extraction**: Extracts relevant segments based on user queries using a Faiss index built with `Alibaba-NLP/gte-large-en-v1.5` embeddings.
 
-- **FFmpeg**: VividCut-AI relies on FFmpeg for video processing. You can install it using the following commands:
+- 🗣️ **Face Tracking and Cropping**: Automatically tracks and crops faces in videos using YOLO models.
 
-  ```bash
-  sudo apt-get update
-  sudo apt-get install ffmpeg
-  ```
+- 🔗 **Video Clipping**: Clips and processes video segments based on AI-identified content.
 
-- **Python Packages**: All required Python packages are listed in the `requirements.txt` file. To install them, run:
+- 🌐🎥 **Automation**: Automates the video processing workflow, making it easier for content creators to produce high-quality videos.
 
-  ```bash
-  pip install -r requirements.txt
-  ```
+## 🚀 Quick Start: Run VividCut-AI
 
-- **Groq API Key**: You'll need to include your Groq API key in the `CLI.py` code to use the AI functionalities. Make sure to replace the placeholder in the script with your actual API key.
-
-## Installation
-
-To get started with VividCut-AI, follow these steps:
+To run VividCut-AI locally, follow these steps:
 
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/yourusername/VividCut-AI.git
+   git clone https://github.com/Mbonea-Mjema/VividCut-AI.git
    cd VividCut-AI
    ```
 
 2. **Install the Dependencies**:
 
-   Make sure FFmpeg is installed on your system, then install the required Python packages:
-
    ```bash
    pip install -r requirements.txt
+   sudo apt-get install ffmpeg
    ```
 
-## Usage
+3. **Run the CLI**:
 
-VividCut-AI provides a command-line interface (CLI) for easy video editing. To use the tool, run the following command:
+   ```bash
+   python CLI.py --video_id <YOUTUBE_VIDEO_ID>
+   ```
 
-```bash
-python CLI.py
-```
+4. **Don't forget to include your Groq API key** in the `CLI.py` code to enable the AI functionalities.
 
-## Example
+## Framework Overview
 
-Here’s an example of how to use VividCut-AI:
+- 🎬 The `AIEditor` component processes video transcripts and identifies key segments.
 
-```bash
-python CLI.py
-```
+- 🎥 The `VideoProcessor` component handles video clipping, face tracking, and cropping.
 
-This command will process the video with the given ID using the VividCut-AI pipeline.
+💡 VividCut-AI offers powerful tools for automating video editing, making it an essential tool for content creators.
 
-## License
+## Technologies Used
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+VividCut-AI utilizes the following technologies:
 
-## Contributions
+- **Faiss**: For fast and efficient similarity search.
+- **Moviepy**: For video processing and editing.
+- **OpenAI**: For AI-driven content extraction and processing.
+- **YOLO**: For object detection and face tracking in video.
 
-Contributions are welcome! Feel free to open an issue or submit a pull request with your improvements or bug fixes.
+These technologies provide a robust framework for automating video editing processes.
 
-## Contact
+## 💁 Contributing
 
-If you have any questions or suggestions, please feel free to reach out.
+As an open-source project, we welcome contributions, whether it's a new feature, improved infrastructure, or better documentation.
 
----
-
-Thank you for using VividCut-AI! We hope it makes your video editing process smooth and efficient.
+<p align="center">
+  <a href="https://star-history.com/#Mbonea-Mjema/VividCut-AI&Date">
+    <img src="https://api.star-history.com/svg?repos=Mbonea-Mjema/VividCut-AI&type=Date" alt="Star History Chart">
+  </a>
+</p>
