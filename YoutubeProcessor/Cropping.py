@@ -18,7 +18,7 @@ class YOLOv5Model:
         # Load model and suppress unnecessary messages
         with torch.no_grad():
             self.model = torch.hub.load(
-                "ultralytics/yolov5", "yolov5m", pretrained=True
+                "ultralytics/yolov5", "yolov5l", pretrained=True
             )
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model.to(self.device)

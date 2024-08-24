@@ -61,7 +61,7 @@ class AIEditor:
 
     def generate_clip_range(self, neighbors_dict: Dict, topic: str, video_id: str) -> Dict[str, any]:
         prompt = clip_range_prompt.replace("{neigbours-dict}", str(neighbors_dict)).replace("{topic}", topic)
-        clip_range_text = self._generate_response(prompt, model="llama-3.1-70b-versatile", temperature=0)
+        clip_range_text = self._generate_response(prompt, model="llama-3.1-70b-versatile", temperature=1)
         clip_range = eval(clip_range_text)
 
         start = neighbors_dict[clip_range[0]]['start']
