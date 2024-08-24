@@ -3,21 +3,53 @@ from groq import Groq
 import yt_dlp
 
 
-def download_video(url, filename):
+import os
+import subprocess
+import yt_dlp
+
+def download_video(url, base_filename):
+    # Download the entire video
     ydl_opts = {
-        "format": "worst[ext=mp4]",  # This selects the worst quality mp4
-        "outtmpl": filename,
-        "merge_output_format": "mp4",
-        "postprocessors": [
-            {
-                "key": "FFmpegVideoConvertor",
-                "preferedformat": "mp4",
-            }
-        ],
+        "format": "worst[ext=mp4]",  # Select the worst quality mp4
+        "outtmpl": base_filename,  # Save as the base filename
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
+
+def trim_video(input_file, output_file, start_time, end_time):
+    # Use ffmpeg to trim the video
+    subprocess.run([
+        "ffmpeg", "-y",  # Overwrite output file if it exists
+        "-i", input_file,  # Input file
+        "-ss", str(start_time),  # Start time
+        "-to", str(end_time),  # End time
+        "-c", "copy",  # Copy codec, no re-encoding
+        output_file
+    ])
+
+def download_video_segments(url, segments, base_filename):
+    # Remove .mp4 extension if it exists
+    if base_filename.endswith('.mp4'):
+        base_filename = base_filename[:-4]
+
+    # Step 1: Download the full video
+    full_video_filename = f"{base_filename}_full.mp4"
+    download_video(url, full_video_filename)
+
+    files = []
+    # Step 2: Trim the video into segments
+    for i, segment in enumerate(segments):
+        segment_filename = f"{base_filename}_segment_{i+1}.mp4"
+        trim_video(full_video_filename, segment_filename, segment['start_time'], segment['end_time'])
+        files.append(segment_filename)
+        print(f"Trimmed segment {i+1} as {segment_filename}")
+
+    # Optionally: Remove the full video after trimming
+    os.remove(full_video_filename)
+
+    return files
+
 
 
 

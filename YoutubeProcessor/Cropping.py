@@ -18,7 +18,7 @@ class YOLOv5Model:
         # Load model and suppress unnecessary messages
         with torch.no_grad():
             self.model = torch.hub.load(
-                "ultralytics/yolov5", "yolov5n", pretrained=True
+                "ultralytics/yolov5", "yolov5m", pretrained=True
             )
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model.to(self.device)
@@ -98,7 +98,7 @@ class VideoProcessor:
         final_video.close()
         # Clean up temporary files
 
-    def segment_video(self, video,  ):
+    def segment_video(self, video, sample_rate ):
         index = 0
         for t in np.arange(0, video.duration, sample_rate):
             frame = video.get_frame(t)

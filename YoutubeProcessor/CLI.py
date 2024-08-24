@@ -3,7 +3,7 @@ import os
 import json
 from typing import Dict, List
 from AIEditor import AIEditor  # Assuming AIEditor is defined in a separate module
-from _utils import download_video  # Importing the download function
+from _utils import download_video_segments  # Importing the download function
 from Cropping import VideoProcessor, YOLOv5Model  # Importing the video processing classes
 
 class CLI:
@@ -133,18 +133,14 @@ class CLI:
     def download_and_clip_video(self, video_url, segments):
         """Handles downloading and clipping the video based on selected segments."""
         # Step 1: Download the video
-        video_filename = "downloaded_video.mp4"
-        print(f"\nDownloading video from {video_url}...")
-        download_video(video_url, video_filename)
+        video_filename = "downloaded_video"
+        print(f"\nDownloading segments video from {video_url}...")
+        files=download_video_segments(video_url, segments,video_filename)
 
-        # Step 2: Process the video and create clips based on segments
-        print("\nProcessing and clipping the video...")
-        clips = self.video_processor.segment_video(video_filename, segments)
-
-        # Optionally, combine the clips into a final video
-        output_video = "final_video.mp4"
-        print("\nCombining clips into final video...")
-        self.video_processor.process_video(video_filename, output_video)
+        for file in files:
+            # Optionally, combine the clips into a final video
+            output_video = f"{files.index(file)}_final_video.mp4"
+            self.video_processor.process_video(file, output_video)
 
         print(f"\nVideo processing complete. Final video saved as {output_video}.")
 
