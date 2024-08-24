@@ -34,7 +34,7 @@
 Follow the installation steps below for running VividCut-AI locally.
 Please read "installation-notes.md" for more details.
 
-## 🎥 Showcase
+## 🛠️ Workflow
 
 ![Workflow](Untitled-2023-08-28-1608.png)
 
