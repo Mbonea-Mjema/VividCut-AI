@@ -41,6 +41,8 @@ Before you can use VividCut-AI, make sure you have the following dependencies in
   pip install -r requirements.txt
   ```
 
+- **Groq API Key**: You'll need to include your Groq API key in the `CLI.py` code to use the AI functionalities. Make sure to replace the placeholder in the script with your actual API key.
+
 ## Installation
 
 To get started with VividCut-AI, follow these steps:
@@ -65,17 +67,15 @@ To get started with VividCut-AI, follow these steps:
 VividCut-AI provides a command-line interface (CLI) for easy video editing. To use the tool, run the following command:
 
 ```bash
-python CLI.py --video_id <YOUTUBE_VIDEO_ID>
+python CLI.py
 ```
-
-Replace `<YOUTUBE_VIDEO_ID>` with the ID of the YouTube video you want to edit.
 
 ## Example
 
 Here’s an example of how to use VividCut-AI:
 
 ```bash
-python CLI.py --video_id dQw4w9WgXcQ
+python CLI.py
 ```
 
 This command will process the video with the given ID using the VividCut-AI pipeline.

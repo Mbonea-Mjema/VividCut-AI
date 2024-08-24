@@ -1,6 +1,8 @@
 import curses
 import os
 import json
+import re
+import sys
 from typing import Dict, List
 from AIEditor import AIEditor  # Assuming AIEditor is defined in a separate module
 from _utils import download_video_segments  # Importing the download function
@@ -144,9 +146,26 @@ class CLI:
 
         print(f"\nVideo processing complete. Final video saved as {output_video}.")
 
+    def extract_video_id(self, url: str) -> str:
+        """Extract the video ID from a full YouTube URL."""
+        video_id = None
+        match = re.match(r'(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})', url)
+        if match:
+            video_id = match.group(1)
+        return video_id
+
     def run(self):
         print("Welcome to the AI Editor CLI!")
-        video_id = input("Enter the YouTube video ID: ").strip()
+
+        if len(sys.argv) > 1:
+            video_link = sys.argv[1].strip()
+        else:
+            video_link = input("Enter the YouTube video link: ").strip()
+
+        video_id = self.extract_video_id(video_link)
+        if not video_id:
+            print("Invalid YouTube link. Exiting.")
+            return
 
         print("\nProcessing transcript...")
         wisdom_json = self.ai_editor.process_transcript(video_id)
