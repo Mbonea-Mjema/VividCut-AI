@@ -23,7 +23,7 @@ class Faiss:
         os.makedirs(self.base_dir, exist_ok=True)
 
     def _create_embeddings(self, texts):
-        inputs = self.tokenizer(texts,return_tensors='pt')
+        inputs = self.tokenizer(texts, padding=True, truncation=True, return_tensors='pt')
         with torch.no_grad():
             embeddings = self.model(**inputs).last_hidden_state.mean(dim=1).cpu().numpy()
         return embeddings
