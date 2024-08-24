@@ -1,4 +1,3 @@
-
 # VividCut-AI
 
 <img src="editor_pic.webp" alt="Dave the Video Editor" width="200"/>
@@ -17,7 +16,7 @@ Below is a visual representation of how VividCut-AI processes video clips:
 
 2. **Transcript Chunking**: The transcript is chunked into smaller parts with overlapping. Each chunk is 120 seconds of the audio transcript, with an overlapping of 40 seconds between chunks. This is used to create the Faiss Index.
 
-3. **Faiss Index**: The Faiss Index is created from the chunks and is used to efficiently search through the transcript data.
+3. **Faiss Index**: The Faiss Index is created from the chunks and is used to efficiently search through the transcript data. The text embeddings used to build this Faiss index are generated using the `Alibaba-NLP/gte-large-en-v1.5` model, which provides high-quality semantic embeddings for accurate content retrieval.
 
 4. **LLM Interaction**: The user queries the system, selecting a quote, idea, story, or custom detail to extract. The LLM (Large Language Model) takes the query, processes the relevant chunks from the Faiss Index, and identifies the exact time range where the video should be cut.
 
@@ -31,16 +30,16 @@ Before you can use VividCut-AI, make sure you have the following dependencies in
 
 - **FFmpeg**: VividCut-AI relies on FFmpeg for video processing. You can install it using the following commands:
 
-    ```bash
-    sudo apt-get update
-    sudo apt-get install ffmpeg
-    ```
+  ```bash
+  sudo apt-get update
+  sudo apt-get install ffmpeg
+  ```
 
 - **Python Packages**: All required Python packages are listed in the `requirements.txt` file. To install them, run:
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+  ```bash
+  pip install -r requirements.txt
+  ```
 
 ## Installation
 
@@ -48,18 +47,18 @@ To get started with VividCut-AI, follow these steps:
 
 1. **Clone the Repository**:
 
-    ```bash
-    git clone https://github.com/yourusername/VividCut-AI.git
-    cd VividCut-AI
-    ```
+   ```bash
+   git clone https://github.com/yourusername/VividCut-AI.git
+   cd VividCut-AI
+   ```
 
 2. **Install the Dependencies**:
 
-    Make sure FFmpeg is installed on your system, then install the required Python packages:
+   Make sure FFmpeg is installed on your system, then install the required Python packages:
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ## Usage
 
