@@ -38,6 +38,26 @@ Please read "installation-notes.md" for more details.
 
 ![Workflow](Untitled-2023-08-28-1608.png)
 
+## 🎥 Showcase
+
+Here’s a demonstration of VividCut-AI's capabilities:
+
+### Before Processing
+
+<video width="320" height="240" controls>
+  <source src="Sample/downloaded_video_segment_1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+### After Processing
+
+<video width="320" height="240" controls>
+  <source src="Sample/0_final_video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+These examples illustrate the transformation from a raw video segment to a fully processed clip, showcasing the power of VividCut-AI.
+
 ## ☕ Buy Me a Coffee
 
 If you appreciate the work and would like to support future developments, consider buying me a coffee!
