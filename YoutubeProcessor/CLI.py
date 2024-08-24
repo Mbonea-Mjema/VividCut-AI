@@ -225,7 +225,7 @@ class CLI:
 
 if __name__ == "__main__":
     # Initialize AIEditor with your API key
-    api_key = "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"  # Replace with your actual API key
+    api_key = "gsk_xxxx"  # Replace with your actual API key
     ai_editor = AIEditor(api_key=api_key)
 
     # Initialize and run the CLI
