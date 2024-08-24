@@ -1,5 +1,5 @@
 embeddings/
 YoutubeProcessor/Video_Data/
 *.pyc
-
-*.mp4
+temp_clips/
+/*.mp4
