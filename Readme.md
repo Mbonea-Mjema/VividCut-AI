@@ -38,11 +38,11 @@ Please read "installation-notes.md" for more details.
 
 ![Workflow](Untitled-2023-08-28-1608.png)
 
-## 🌟 Show Your Support
+## ☕ Buy Me a Coffee
 
-We hope you find VividCut-AI helpful! If you do, let us know by giving us a star ⭐ on the repo. It's easy, just click on the 'Star' button at the top right of the page. Your support means a lot to us and keeps us motivated to improve and expand VividCut-AI. Thank you and happy content creating! 🎉
+If you appreciate the work and would like to support future developments, consider buying me a coffee!
 
-[![GitHub star chart](https://api.star-history.com/svg?repos=Mbonea-Mjema/VividCut-AI&type=Date)](https://github.com/Mbonea-Mjema/VividCut-AI/stargazers)
+<a href="https://buymeacoffee.com/telegramsui" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50" width="210"></a>
 
 ## 🛠️ How it works
 
