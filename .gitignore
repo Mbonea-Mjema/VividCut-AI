@@ -1,3 +1,5 @@
 embeddings/
 YoutubeProcessor/Video_Data/
 *.pyc
+
+*.mp4
