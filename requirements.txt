@@ -88,3 +88,4 @@ websockets==12.0
 yarl==1.9.4
 youtube-transcript-api==0.6.2
 yt-dlp==2024.8.6
+omegaconf

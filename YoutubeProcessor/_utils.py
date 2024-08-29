@@ -8,13 +8,29 @@ import subprocess
 import yt_dlp
 
 def download_video(url, base_filename):
-    # Download the entire video
+    # Download the second best quality video
     ydl_opts = {
-        "format": "worst[ext=mp4]",  # Select the worst quality mp4
+        "format": "bestvideo[ext=mp4]/bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo[height>240][ext=mp4]/best",  # Fallbacks for best quality selection
         "outtmpl": base_filename,  # Save as the base filename
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        formats = ydl.extract_info(url, download=False)["formats"]
+        sorted_formats = sorted(
+            [f for f in formats if f["vcodec"] != "none" and f["acodec"] != "none"],
+            key=lambda f: (f.get("height", 0), f.get("width", 0)),
+            reverse=True,
+        )
+
+        if len(sorted_formats) > 1:
+            # Set the format ID to the second best quality
+            ydl_opts["format"] = sorted_formats[1]["format_id"]
+        else:
+            # If there's only one format, fallback to the best available
+            ydl_opts["format"] = "best"
+
+        # Download the video using the selected format
+        ydl = yt_dlp.YoutubeDL(ydl_opts)
         ydl.download([url])
 
 def trim_video(input_file, output_file, start_time, end_time):

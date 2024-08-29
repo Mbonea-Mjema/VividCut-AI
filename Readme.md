@@ -40,21 +40,15 @@ Please read "installation-notes.md" for more details.
 
 ## 🎥 Showcase
 
-Here’s a demonstration of VividCut-AI's capabilities:
+Here's a demonstration of VividCut-AI's capabilities:
 
 ### Before Processing
 
-<video width="320" height="240" controls>
-  <source src="Sample/downloaded_video_segment_1.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+![Original Video](Sample/original.gif)
 
 ### After Processing
 
-<video width="320" height="240" controls>
-  <source src="Sample/0_final_video.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+![Cropped Video](Sample/cropped.gif)
 
 These examples illustrate the transformation from a raw video segment to a fully processed clip, showcasing the power of VividCut-AI.
 
@@ -99,7 +93,7 @@ To run VividCut-AI locally, follow these steps:
 3. **Run the CLI**:
 
    ```bash
-   python CLI.py --video_id <YOUTUBE_VIDEO_ID>
+   python CLI.py
    ```
 
 4. **Don't forget to include your Groq API key** in the `CLI.py` code to enable the AI functionalities.
