@@ -6,7 +6,7 @@ import sys
 from typing import Dict, List
 from AIEditor import AIEditor  # Assuming AIEditor is defined in a separate module
 from _utils import download_video_segments  # Importing the download function
-from Cropping import VideoProcessor, YOLOv8FaceModel  # Importing the video processing classes
+from Cropping import VideoProcessor, YOLOModel  # Importing the video processing classes
 
 class CLI:
     def __init__(self, ai_editor: AIEditor, cache_file: str = "llm_cache.json"):
@@ -225,7 +225,7 @@ class CLI:
 
 if __name__ == "__main__":
     # Initialize AIEditor with your API key
-    api_key = "gsk_xxxx"  # Replace with your actual API key
+    api_key = "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"  # Replace with your actual API key
     ai_editor = AIEditor(api_key=api_key)
 
     # Initialize and run the CLI

@@ -51,7 +51,7 @@ class VideoProcessor:
         for segment in tqdm(segments, desc="Processing video"):
             clip = video.subclip(segment["start"], segment["end"])
             detections = segment["detections"]
-            print(detections)
+            # print(detections)
 
             if len(detections) == 1:
                 processed_clip = self._process_single_face(
@@ -122,7 +122,7 @@ class VideoProcessor:
 
     def _process_center_clip(self, clip, new_height):
         # Calculate center crop area
-        crop_width = new_height * 9 / 16
+        crop_width = clip.w 
         crop_x1 = (clip.w - crop_width) / 2
         crop_x2 = crop_x1 + crop_width
 
