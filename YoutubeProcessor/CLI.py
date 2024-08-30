@@ -13,7 +13,7 @@ class CLI:
         self.ai_editor = ai_editor
         self.cache_file = cache_file
         self.llm_cache = self.load_cache()
-        self.model = YOLOv8FaceModel()  # Initialize the YOLO model
+        self.model = YOLOModel()  # Initialize the YOLO model
         self.video_processor = VideoProcessor(self.model)  # Initialize video processor
 
     def load_cache(self) -> Dict[str, str]:
@@ -225,7 +225,7 @@ class CLI:
 
 if __name__ == "__main__":
     # Initialize AIEditor with your API key
-    api_key = "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"  # Replace with your actual API key
+    api_key = "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"  # Replace with your actual API key
     ai_editor = AIEditor(api_key=api_key)
 
     # Initialize and run the CLI
