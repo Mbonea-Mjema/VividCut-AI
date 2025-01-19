@@ -2,4 +2,8 @@ embeddings/
 YoutubeProcessor/Video_Data/
 *.pyc
 temp_clips/
-/*.mp4
+*.mp4
+Captions/captions/dist/
+Captions/captions/node_modules/
+*.webm
+*.avi

@@ -1,0 +1,20 @@
+{
+  "name": "captions",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "start": "revideo editor --projectFile ./src/project.tsx",
+    "render": "tsc && node dist/render.js"
+  },
+  "dependencies": {
+    "@revideo/core": "0.10.3",
+    "@revideo/2d": "0.10.3",
+    "@revideo/renderer": "0.10.3"
+  },
+  "devDependencies": {
+    "@revideo/ui": "0.10.3",
+    "@revideo/cli": "0.10.3",
+    "typescript": "5.5.4",
+    "vite": "^4.5"
+  }
+}

@@ -11,11 +11,12 @@ from moviepy.editor import (
 from tqdm import tqdm
 import os
 from ultralytics import YOLO
-
+from scenedetect import VideoManager, SceneManager
+from scenedetect.detectors import ContentDetector
 
 class YOLOModel:
     def __init__(self):
-        self.model = YOLO("yolov5nu.pt")
+        self.model = YOLO("yolov8s.pt")
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model.to(self.device)
         print(f"Using device: {self.device}")
@@ -27,6 +28,9 @@ class YOLOModel:
         return [(box, conf) for box, conf in zip(boxes, confidences) if conf > .7]
 
 
+
+
+
 class VideoProcessor:
     def __init__(self, model, temp_dir="temp_clips"):
         self.model = model
@@ -34,24 +38,28 @@ class VideoProcessor:
         self.temp_dir = temp_dir
         os.makedirs(temp_dir, exist_ok=True)
 
+
     def process_video(self, input_video, output_video, sample_rate=0.1):
         video = VideoFileClip(input_video)
-        total_frames = int(video.fps * video.duration)
-        frame_sample_interval = int(1 / sample_rate)
-
         target_ratio = 9 / 16
         new_height = int(video.w / target_ratio)
+        frame_sample_interval = int(1 / sample_rate)
 
         clips = []
         segment_index = 0
         chunks = []
-        segments = list(self.segment_video(video, frame_sample_interval, total_frames))
+        segments = self.detect_scenes(input_video)
         no_segments = len(segments)
 
-        for segment in tqdm(segments, desc="Processing video"):
+
+        for segment in tqdm(segments, desc="Processing Scene"):
             clip = video.subclip(segment["start"], segment["end"])
-            detections = segment["detections"]
-            # print(detections)
+            # num_samples = 4
+            # frame_count = int(clip.fps * clip.duration)
+            # frame_indices = np.linspace(0, frame_count - 1, num_samples, dtype=int)
+
+            detections = self.model.detect(clip.get_frame(0))             
+
 
             if len(detections) == 1:
                 processed_clip = self._process_single_face(
@@ -81,6 +89,25 @@ class VideoProcessor:
         final_video = concatenate_videoclips(collection)
         final_video.write_videofile(output_video, audio_codec="aac")
         final_video.close()
+
+    def detect_scenes(self, input_video):
+        # Initialize the video manager and scene manager
+        video_manager = VideoManager([input_video])
+        scene_manager = SceneManager()
+        scene_manager.add_detector(ContentDetector(threshold=1.0))
+
+        # Start scene detection
+        video_manager.start()
+        scene_manager.detect_scenes(video_manager)
+
+        # Get the list of detected scenes
+        scene_list = scene_manager.get_scene_list()
+        segments = [{"start": start.get_seconds(), "end": end.get_seconds()} for start, end in scene_list]
+
+        video_manager.release()
+        return segments
+
+
 
     def segment_video(self, video, frame_sample_interval, total_frames):
         segments = []
@@ -174,8 +201,8 @@ class VideoProcessor:
 
 # Main execution
 if __name__ == "__main__":
-    input_video = "downloaded_video_segment_1.mp4"
-    output_video = "sample_v5nu.mp4"
+    input_video = "sample.webm"
+    output_video = "sample.mp4"
 
     model = YOLOModel()
     video_processor = VideoProcessor(model)
