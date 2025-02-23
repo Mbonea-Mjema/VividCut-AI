@@ -8,6 +8,7 @@ import {
 } from "@revideo/core";
 import { Rect, Video, makeScene2D, Media } from "@revideo/2d";
 import "./global.css";
+import data from "./detection.json";
 
 interface Detection {
   position: [number, number];
@@ -18,6 +19,8 @@ interface Detection {
 interface DetectionGroup {
   detections: Detection[];
   duration: number;
+  start: number;
+  end: number;
   key: number;
 }
 
@@ -29,222 +32,13 @@ function getCumulativeTime(currentIndex: number): number {
   return totalTime;
 }
 
-const detections: DetectionGroup[] = [
-  {
-    detections: [
-      {
-        position: [580.1918402777778, -80.31087239583337],
-        size: [648.3600260416666, 1148.390625],
-        color: "red",
-      },
-      {
-        position: [-752.7460937499999, 117.33018663194434],
-        size: [1085.927734375, 1454.9322916666665],
-        color: "green",
-      },
-    ],
-    duration: 25.316937821032713,
-    key: 1,
-  },
-  {
-    detections: [
-      {
-        position: [135.76302083333348, 91.69791666666652],
-        size: [2253.4210069444443, 1694.071072048611],
-        color: "red",
-      },
-    ],
-    duration: 12.721031359826984,
-    key: 2,
-  },
-  {
-    detections: [
-      {
-        position: [57.42925347222217, 130.5546875],
-        size: [1570.071506076389, 1629.3997395833333],
-        color: "red",
-      },
-    ],
-    duration: 6.75674452554744,
-    key: 3,
-  },
-  {
-    detections: [
-      {
-        position: [384.5062934027778, 23.026475694444343],
-        size: [833.5773654513888, 1306.3109809027776],
-        color: "red",
-      },
-      {
-        position: [-743.8632812499999, 68.23014322916652],
-        size: [953.4364149305555, 1417.2632378472222],
-        color: "green",
-      },
-    ],
-    duration: 5.088412543930794,
-    key: 4,
-  },
-  {
-    detections: [
-      {
-        position: [146.7204861111111, 110.14398871527783],
-        size: [1781.9055989583333, 1662.5961371527776],
-        color: "red",
-      },
-    ],
-    duration: 6.17282833198162,
-    key: 5,
-  },
-  {
-    detections: [
-      {
-        position: [-747.0646701388888, 54.52864583333326],
-        size: [951.0179036458333, 1391.2682291666665],
-        color: "red",
-      },
-      {
-        position: [496.29600694444434, 19.460720486111086],
-        size: [638.5494791666666, 1223.991970486111],
-        color: "green",
-      },
-    ],
-    duration: 9.926575290619091,
-    key: 6,
-  },
-  {
-    detections: [
-      {
-        position: [-549.7211371527776, 85.158203125],
-        size: [2187.9735243055557, 1734.0708550347222],
-        color: "red",
-      },
-    ],
-    duration: 17.350652608813192,
-    key: 7,
-  },
-  {
-    detections: [
-      {
-        position: [250.44270833333348, 128.33441840277783],
-        size: [1652.47265625, 1639.1969401041665],
-        color: "red",
-      },
-    ],
-    duration: 13.138114355231139,
-    key: 8,
-  },
-  {
-    detections: [
-      {
-        position: [235.26497395833348, -13.1970486111112],
-        size: [922.6346571180555, 1191.8922526041665],
-        color: "red",
-      },
-      {
-        position: [-834.9480794270833, 24.413845486111086],
-        size: [1185.1650390625, 1296.7035590277776],
-        color: "green",
-      },
-    ],
-    duration: 10.051700189240336,
-    key: 9,
-  },
-  {
-    detections: [
-      {
-        position: [-61.03938802083326, 90.99533420138891],
-        size: [2347.029296875, 1688.570095486111],
-        color: "red",
-      },
-    ],
-    duration: 3.0447058664504,
-    key: 10,
-  },
-  {
-    detections: [
-      {
-        position: [436.5833333333335, -28.178602430555657],
-        size: [751.7174479166666, 1213.0400390625],
-        color: "red",
-      },
-      {
-        position: [-854.2296549479165, 25.21451822916663],
-        size: [1239.7574869791665, 1302.4583333333333],
-        color: "green",
-      },
-    ],
-    duration: 9.968283590159501,
-    key: 11,
-  },
-  {
-    detections: [
-      {
-        position: [-280.41731770833326, 105.02766927083326],
-        size: [2794.7100694444443, 1662.699001736111],
-        color: "red",
-      },
-    ],
-    duration: 4.337663152203291,
-    key: 12,
-  },
-  {
-    detections: [
-      {
-        position: [375.0759548611113, 41.13780381944434],
-        size: [788.0201822916666, 1330.345703125],
-        color: "red",
-      },
-      {
-        position: [-816.0648328993054, 105.58203125],
-        size: [1091.0354817708333, 1428.8530815972222],
-        color: "green",
-      },
-    ],
-    duration: 5.213537442552038,
-    key: 13,
-  },
-  {
-    detections: [
-      {
-        position: [203.4299045138889, 116.61013454861109],
-        size: [1262.3837890625, 1639.4168836805554],
-        color: "red",
-      },
-    ],
-    duration: 14.097405244660735,
-    key: 14,
-  },
-  {
-    detections: [
-      {
-        position: [482.1263020833335, 50.271267361111086],
-        size: [560.51171875, 1343.0010850694443],
-        color: "red",
-      },
-      {
-        position: [-830.0545247395833, 101.31271701388891],
-        size: [1098.3889973958333, 1417.355685763889],
-        color: "green",
-      },
-    ],
-    duration: 9.092409299810754,
-    key: 15,
-  },
-  {
-    detections: [
-      {
-        position: [267.0099826388889, 110.85319010416652],
-        size: [1567.9384765625, 1657.5735677083333],
-        color: "red",
-      },
-    ],
-    duration: 2.001998377939998,
-    key: 16,
-  },
-];
+const detections: DetectionGroup[] = data.groups as DetectionGroup[];
 const scene = makeScene2D("scene", function* (view): ThreadGenerator {
   const layoutSize: [number, number] = [1080, 1920];
-  const videoSize: [number, number] = [(1920 / 1080) * 1920, 1920];
+  const videoSize: [number, number] = [
+    (data.original_width / data.original_height) * 1920,
+    1920,
+  ];
 
   // Create two permanent video references
   const video1 = createRef<Media>();
@@ -273,11 +67,11 @@ const scene = makeScene2D("scene", function* (view): ThreadGenerator {
         <Video
           ref={video1}
           size={videoSize}
-          src={"http://localhost:9000/output.mp4"}
-          // src={
-          //   "https://9000-mboneamjema-vividcutai-la8bzjch1jc.ws-eu117.gitpod.io/output.mp4"
-          // }
-          play={true}
+          // src={"http://localhost:9000/fast.mp4"}
+          src={
+            "https://9000-mboneamjema-vividcutai-la8bzjch1jc.ws-eu117.gitpod.io/speed.mp4"
+          }
+          // play={true}
         />
       </Rect>
       <Rect
@@ -290,22 +84,24 @@ const scene = makeScene2D("scene", function* (view): ThreadGenerator {
         <Video
           ref={video2}
           size={videoSize}
-          src={"http://localhost:9000/output.mp4"}
-          // src={
-          //   "https://9000-mboneamjema-vividcutai-la8bzjch1jc.ws-eu117.gitpod.io/output.mp4"
-          // }
-          play={true}
+          // src={"http://localhost:9000/fast.mp4"}
+
+          src={
+            "https://9000-mboneamjema-vividcutai-la8bzjch1jc.ws-eu117.gitpod.io/speed.mp4"
+          }
+          // play={true}
         />
       </Rect>
     </Rect>
   );
 
   yield view.add(baseLayout);
-
+  video1().clampTime(0);
+  video2().clampTime(0);
   for (const group of detections) {
     const groupIndex = detections.indexOf(group);
     const isSplitScreen = group.detections.length === 2;
-    const startTime = groupIndex === 0 ? 0 : getCumulativeTime(groupIndex);
+    const startTime = group.start;
 
     // Reset layout opacity
     yield* _layoutRef().opacity(1, 0);
@@ -329,9 +125,7 @@ const scene = makeScene2D("scene", function* (view): ThreadGenerator {
 
     // Set video times
     video1().clampTime(startTime);
-    if (isSplitScreen) {
-      video2().clampTime(startTime);
-    }
+    video2().clampTime(startTime);
 
     // Update video positions to center detections
     const detection1 = group.detections[0];
@@ -348,11 +142,15 @@ const scene = makeScene2D("scene", function* (view): ThreadGenerator {
       );
     }
 
+    video1().play();
+    video2().play();
+
     // Wait for the specified duration
+
     yield* waitFor(group.duration);
 
     // Fade out
-    yield* _layoutRef().opacity(0, 0.00000000003);
+    yield* _layoutRef().opacity(0, 0);
   }
 });
 
