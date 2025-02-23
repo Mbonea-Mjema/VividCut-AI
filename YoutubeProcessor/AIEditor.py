@@ -10,7 +10,7 @@ import copy,curses
 import pprint
 
 class AIEditor:
-    def __init__(self, api_key: str='', model: str = "llama-3.1-70b-versatile"):
+    def __init__(self, api_key: str='', model: str = "llama-3.3-70b-versatile"):
         self.client = Groq(api_key=api_key)
         self.faiss = Faiss()
         self.model = model
@@ -18,7 +18,6 @@ class AIEditor:
     def _generate_response(self, prompt: str, model: str = None, temperature: float = 0.7, max_tokens: int = 5000) -> str:
         if model is None:
             model = self.model
-
         attempts = 5
         for attempt in range(attempts):
             try:
@@ -32,6 +31,7 @@ class AIEditor:
                         },
                     ],
                 )
+                # print(response.choices[0].message.content.strip())
                 return response.choices[0].message.content.strip()
             except Exception as e:
                 if attempt < attempts - 1:
@@ -49,7 +49,8 @@ class AIEditor:
         current_section = None
 
         for line in lines:
-            if (line.startswith("**") and line.endswith("**")) or (line.startswith("# ")):
+            print(line)
+            if (line.startswith("**") and line.endswith("**")) or (line.startswith("###")):
                 current_section = line.strip("*# ").strip()
                 organized_content[current_section] = []
             elif current_section:
@@ -61,7 +62,7 @@ class AIEditor:
 
     def generate_clip_range(self, neighbors_dict: Dict, topic: str, video_id: str) -> Dict[str, any]:
         prompt = clip_range_prompt.replace("{neigbours-dict}", str(neighbors_dict)).replace("{topic}", topic)
-        clip_range_text = self._generate_response(prompt, model="llama-3.1-70b-versatile", temperature=0)
+        clip_range_text = self._generate_response(prompt, model="llama-3.3-70b-versatile", temperature=0)
         clip_range = eval(clip_range_text)
 
         start = neighbors_dict[clip_range[0]]['start']

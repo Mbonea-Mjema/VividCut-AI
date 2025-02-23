@@ -169,6 +169,7 @@ class CLI:
 
         print("\nProcessing transcript...")
         wisdom_json = self.ai_editor.process_transcript(video_id)
+        print(wisdom_json)
         if not wisdom_json:
             print("Failed to process transcript.")
             return
@@ -225,7 +226,7 @@ class CLI:
 
 if __name__ == "__main__":
     # Initialize AIEditor with your API key
-    api_key = "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"  # Replace with your actual API key
+    api_key = "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"  # Replace with your actual API key
     ai_editor = AIEditor(api_key=api_key)
 
     # Initialize and run the CLI

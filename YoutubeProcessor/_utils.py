@@ -24,7 +24,8 @@ def download_video(url, base_filename):
 
         if len(sorted_formats) > 1:
             # Set the format ID to the second best quality
-            ydl_opts["format"] = sorted_formats[1]["format_id"]
+            # ydl_opts["format"] = sorted_formats[1]["format_id"]
+            pass
         else:
             # If there's only one format, fallback to the best available
             ydl_opts["format"] = "best"
